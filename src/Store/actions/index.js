@@ -1,0 +1,1 @@
+export { initRestaurantData } from './home'
