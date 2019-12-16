@@ -4,16 +4,23 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
 
-import reducer from './Store/reducers/reducer'
+import restaurantReducer from './Store/reducers/restaurant'
+import testReducer from './Store/reducers/restaurant'
+
 // import "semantic-ui-css/semantic.min.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, composeEnhancers(
+const rootReducer = combineReducers({
+    restaurantState: restaurantReducer,
+    test: testReducer
+})
+
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 

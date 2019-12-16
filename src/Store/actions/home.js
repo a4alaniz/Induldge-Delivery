@@ -18,8 +18,8 @@ export const initRestaurantData = (zip) => dispatch => {
             }
         })
         .then(response => {
-            dispatch(setRestaurantData(response));
-            console.log(response)
+            dispatch(setRestaurantData(response.data.result.data));
+            console.log(response.data.result.data)
         })
         .catch(err => {
             console.log(err);

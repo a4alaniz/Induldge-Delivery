@@ -37,19 +37,25 @@ class home extends Component {
                     <label>Search for Restaurants <input type="text" value={this.state.zipCode} onChange={this.handleZipChange}/> </label>
                     <input type='submit' value="Submit"/> 
                 </form>
-                <Restaurants />
+                {this.props.rs.map(restData => (
+                    <Restaurants rName={restData.restaurant_name}/>         
+                    ))}
             </div>
         )
     }
 }
 
 
-
+const mapStateToProps = state => {
+    return {
+        rs: state.restaurantState.results
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
         onInitRestaurants: (zip) => dispatch(actions.initRestaurantData(zip))
     }
 }
-
-export default connect(null, mapDispatchToProps )(home)
+  
+export default connect(mapStateToProps, mapDispatchToProps )(home)
