@@ -18,7 +18,7 @@ class showRestaurants extends Component {
                 <h3> {menuHeader.section_name}</h3>
                 <ul>
                     {menuHeader.menu_items.map(item => (
-                        <li >{item.name} {item.price} </li>
+                        <li >{item.name} {item.price} <Button>add</Button> <Button>remove</Button></li>
                     ))}
                 </ul>
             </div>
@@ -32,12 +32,15 @@ class showRestaurants extends Component {
                 <Container textAlign="center">
                     <Card.Group itemsPerRow={4}>
                         {this.props.rs.map(r => (
-                            <Card>
+                            <Card key={r.restaurant_id}>
                                 <Card.Content>
                                     <Card.Header>{r.restaurant_name}</Card.Header>
                                     <Card.Meta>Hours of operation: {r.hours}</Card.Meta>
                                     <Card.Description>
-                                        Steve wants to add you to the group <strong>best friends</strong>
+                                        {r.restaurant_phone}
+                                    </Card.Description>
+                                    <Card.Description>
+                                        {r.address.formatted}
                                     </Card.Description>
                                 </Card.Content>
                                 <Card.Content extra>
@@ -48,9 +51,11 @@ class showRestaurants extends Component {
                                         basic
                                         size='small'
                                     >
-                                        <Header icon='browser' content='Cookies policy' />
-                                        <Modal.Content className={r.restaurant_name}>
+                                        <Header icon='food' content="Menu Items" />
+                                        <Modal.Content >
+                                            <div>
                                             {this.displayMenus(r.menus[0].menu_sections)}
+                                            </div>
                                         </Modal.Content>
                                         <Modal.Actions>
                                             <Button color='green' onClick={this.handleClose} inverted>
