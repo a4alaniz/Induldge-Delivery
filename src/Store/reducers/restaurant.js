@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes'
 import { updateObject } from '../utility'
 
 const initialState = {
-    results: []
+    results: [],
+    address: ''
 }
 
 
@@ -18,9 +19,16 @@ const setRestaurantData = (state, action) => {
   )
 }
 
+const holdAddress = (state, action) => {
+    return updateObject(state, {
+        address: action.address
+    })
+}
+
 const reducer = ( state = initialState, action) => {
     switch ( action.type ) {
         case actionTypes.SET_RESTAURANT_DATA: return setRestaurantData(state, action)
+        case actionTypes.HOLD_ADDRESS: return holdAddress(state, action)
         default: return state
     }
 } 

@@ -7,11 +7,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
-
+// import "semantic-ui-css/semantic.min.css";
 import restaurantReducer from './Store/reducers/restaurant'
 import testReducer from './Store/reducers/restaurant'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import "semantic-ui-css/semantic.min.css";
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

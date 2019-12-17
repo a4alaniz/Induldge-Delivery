@@ -1,1 +1,1 @@
-export { initRestaurantData, setRestaurantData } from './home'
+export { initRestaurantData, setRestaurantData, holdAddress } from './home'

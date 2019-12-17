@@ -1,2 +1,4 @@
 export const SET_RESTAURANT_DATA = 'SET_RESTAURANT_DATA'
 
+export const HOLD_ADDRESS = 'HOLD_ADDRESS'
+

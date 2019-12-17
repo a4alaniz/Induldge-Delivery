@@ -8,9 +8,17 @@ export const setRestaurantData = (results) => {
     }
 }
 
+export const holdAddress = (address) => {
+    return {
+    type: actionTypes.HOLD_ADDRESS,
+    address: address
+    } 
+}
 
-export const initRestaurantData = (zip) => dispatch => {
-        axios.get(`https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/${zip}`, {
+
+
+export const initRestaurantData = (lat, long, distance, cuisine) => dispatch => {
+        axios.get(`https://us-restaurant-menus.p.rapidapi.com/restaurants/search/?lat=${lat}&lon=${long}&distance=${distance}&q=cuisines:${cuisine}&page=1&fullmenu`, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
@@ -18,7 +26,9 @@ export const initRestaurantData = (zip) => dispatch => {
             }
         })
         .then(response => {
-            dispatch(setRestaurantData(response.data.result.data));
+            dispatch(setRestaurantData(response.data.result.data.map(restaurant => (
+               restaurant 
+            ))));
             console.log(response.data.result.data)
         })
         .catch(err => {
