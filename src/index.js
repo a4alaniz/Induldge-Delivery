@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
 // import "semantic-ui-css/semantic.min.css";
 import restaurantReducer from './Store/reducers/restaurant'
-import testReducer from './Store/reducers/restaurant'
+import menuReducer from './Store/reducers/menu'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -18,7 +18,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     restaurantState: restaurantReducer,
-    test: testReducer
+    menu: menuReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

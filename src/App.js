@@ -1,14 +1,21 @@
-import React from 'react';
-import { Route } from 'react-router-dom'
-import home from './containers/home'
+import React, { Component } from 'react';
+import Router from "./Router";
 import './App.css';
+import Navigation from './components/Navigation'
+import { Container } from "semantic-ui-react";
 
-function App() {
-  return (
-    <div className="App">
-       <Route exact path="/" component={home} />
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <Container>
+        <div>
+          <Navigation />
+          <Router />
+        </div>
+      </Container>
+    );
+  }
 }
 
 export default App;

@@ -2,3 +2,6 @@ export const SET_RESTAURANT_DATA = 'SET_RESTAURANT_DATA'
 
 export const HOLD_ADDRESS = 'HOLD_ADDRESS'
 
+export const ADD_MENU_ITEM = 'ADD_MENU_ITEM'
+export const REMOVE_MENU_ITEM = 'REMOVE_MENU_ITEM'
+

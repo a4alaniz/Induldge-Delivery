@@ -24,7 +24,6 @@ class home extends Component {
     handleDistanceChange = (event) => {
         event.persist();
         this.setState({ distance: event.target.value });
-        console.log(this.state.distance)
     };
 
     handleCuisineChange = (event) => {
@@ -107,17 +106,18 @@ class home extends Component {
 }
 
 
-const mapStateToProps = state => {
-    return {
-        rs: state.restaurantState.results
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         rs: state.restaurantState.results
+//     }
+// }
 
 const mapDispatchToProps = dispatch => {
     return {
         onInitRestaurants: (lat, long, distance, cuisine) => dispatch(actions.initRestaurantData(lat, long, distance, cuisine)),
-        holdAddress: (address) => dispatch(actions.holdAddress(address))
+        holdAddress: (address) => dispatch(actions.holdAddress(address)),
+        onResults: (results) => dispatch(actions.setRestaurantData(results))
     }
 }
   
-export default connect(mapStateToProps, mapDispatchToProps )(home)
+export default connect(null, mapDispatchToProps )(home)

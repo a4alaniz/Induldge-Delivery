@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { Card, Button, Container, Header, Icon, Modal } from "semantic-ui-react";
 import { connect } from 'react-redux';
+import * as actions from '../Store/actions/index'
+import SeeOrders from './SeeOrders'
 
 class showRestaurants extends Component {
-    state = { modalOpen: false }
+    state = { 
+        modalOpen: false
+    }
 
     handleOpen = (id) => {
         this.setState({ modalOpen: id })
@@ -11,14 +15,18 @@ class showRestaurants extends Component {
 
     handleClose = () => this.setState({ modalOpen: false })
 
-    displayMenus = (menus) => {
-        // console.log(menus)
+    handleAddClick = (price, item, restaurantName) => {
+        this.props.addMenuItem(price, item, restaurantName)
+    }
+
+    displayMenus = (menus, restaurantName) => {
         return (menus.map(menuHeader => {
             return <div>
                 <h3> {menuHeader.section_name}</h3>
                 <ul>
                     {menuHeader.menu_items.map(item => (
-                        <li >{item.name} {item.price} <Button>add</Button> <Button>remove</Button></li>
+                        <li >{item.name} {item.price} 
+                        <Button onClick={() => this.handleAddClick(item.price, item.name, restaurantName)}>add</Button> <Button>remove</Button></li>
                     ))}
                 </ul>
             </div>
@@ -54,7 +62,7 @@ class showRestaurants extends Component {
                                         <Header icon='food' content="Menu Items" />
                                         <Modal.Content >
                                             <div>
-                                            {this.displayMenus(r.menus[0].menu_sections)}
+                                            {this.displayMenus(r.menus[0].menu_sections, r.restaurant_name)}
                                             </div>
                                         </Modal.Content>
                                         <Modal.Actions>
@@ -75,6 +83,7 @@ class showRestaurants extends Component {
                             </Card>))
                             }
                     </Card.Group>
+                <SeeOrders/>
                 </Container>
             </div>
         )
@@ -83,8 +92,14 @@ class showRestaurants extends Component {
 
 const mapStateToProps = state => {
     return {
-        rs: state.restaurantState.results
+        rs: state.restaurantState.results,
     }
 }
 
-export default connect(mapStateToProps, null)(showRestaurants)
+const mapDispatchToProps = dispatch => {
+    return {
+        addMenuItem: (itemPrice, itemName, restaurantName) => dispatch(actions.addMenuItem(itemPrice, itemName, restaurantName))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(showRestaurants)
