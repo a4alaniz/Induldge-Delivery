@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Restaurants from '../components/Restaurants'
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { Container } from "semantic-ui-react";
+import { Form, Button} from 'semantic-ui-react'
 
 import * as actions from '../Store/actions/index'
 
@@ -16,10 +18,9 @@ class home extends Component {
         cuisine: ''
     }
 
-    componentDidMount () {
-        console.log(actions)
-        // this.props.onInitRestaurants();
-    }
+    // componentDidMount () {
+    //     console.log(actions)
+    // }
 
     handleDistanceChange = (event) => {
         event.persist();
@@ -46,23 +47,26 @@ class home extends Component {
         geocodeByAddress(address)
           .then(results => getLatLng(results[0]))
           .then(latLng => {
-              this.setState({lat: latLng.lat, long: latLng.lat})})
-            //   console.log('Success', latLng.lat))
+              console.log(latLng)
+              this.setState({lat: latLng.lat, long: latLng.lng})})
           .catch(error => console.error('Error', error));
       };
       
 
     render() {
         return (
-            <div>
-                <h1>Hello</h1>
-                <PlacesAutocomplete
+            <Container>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <Form><Form.Field><PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>Type your address here!
+          <div>
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',
@@ -93,18 +97,24 @@ class home extends Component {
             </div>
           </div>
         )}
-      </PlacesAutocomplete>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Distance <input type="text" value={this.state.distance} onChange={this.handleDistanceChange}/> </label>
-                    <label>Type of Cuisine <input type="text" value={this.state.cuisine} onChange={this.handleCuisineChange}/> </label>
-                    <input type='submit' value="Submit"/> 
-                </form>
+      </PlacesAutocomplete></Form.Field></Form>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group widths='equal'>
+                    <Form.Field><label>Distance <input type="text" value={this.state.distance} onChange={this.handleDistanceChange}/> </label></Form.Field>
+                    <Form.Field><label>Type of Cuisine <input type="text" value={this.state.cuisine} onChange={this.handleCuisineChange}/> </label></Form.Field>
+                      </Form.Group>
+                    <Form.Group>
+                    <Form.Field
+                        id='form-button-control-public'
+                        control={Button}
+                        content='Search'
+    /></Form.Group>
+                </Form>
                 <Restaurants/>
-            </div>
+            </Container>
         )
     }
 }
-
 
 // const mapStateToProps = state => {
 //     return {
@@ -116,7 +126,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onInitRestaurants: (lat, long, distance, cuisine) => dispatch(actions.initRestaurantData(lat, long, distance, cuisine)),
         holdAddress: (address) => dispatch(actions.holdAddress(address)),
-        onResults: (results) => dispatch(actions.setRestaurantData(results))
     }
 }
   

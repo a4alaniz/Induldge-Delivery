@@ -6,13 +6,14 @@ import { Container } from "semantic-ui-react";
 
 
 class App extends Component {
+
+
+
   render() {
     return (
       <Container>
-        <div>
           <Navigation />
           <Router />
-        </div>
       </Container>
     );
   }

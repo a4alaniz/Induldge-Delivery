@@ -1,2 +1,2 @@
 export { initRestaurantData, setRestaurantData, holdAddress } from './home'
-export { addMenuItem, removeItem } from './menu'
+export { addMenuItem, removeFromCarts, addItemPrice, subtractItemPrice } from './menu'

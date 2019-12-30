@@ -7,9 +7,7 @@ const initialState = {
 }
 
 
-// const initRestaurantData = (state, action) => {
 
-// }
 
 
 const setRestaurantData = (state, action) => {

@@ -10,7 +10,9 @@ import * as serviceWorker from './serviceWorker';
 // import "semantic-ui-css/semantic.min.css";
 import restaurantReducer from './Store/reducers/restaurant'
 import menuReducer from './Store/reducers/menu'
+import userReducer from './Store/reducers/User'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { reducer as formReducer } from 'redux-form'
 
 
 
@@ -18,7 +20,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     restaurantState: restaurantReducer,
-    menu: menuReducer
+    menu: menuReducer,
+    user: userReducer,
+    form: formReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

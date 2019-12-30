@@ -1,35 +1,38 @@
 import React, { Component } from "react";
-import { Container, Menu, Button, Icon, Flag } from "semantic-ui-react";
+import { Container, Menu, Button, Icon } from "semantic-ui-react";
 // import { connect } from "react-redux";
 
 import { Link, withRouter } from "react-router-dom";
 
 class Navigation extends Component {
-//   handleLogInButton = event => {
-//     this.props.history.push("/login");
-//   };
+  handleLogInButton = event => {
+    this.props.history.push("/login");
+  };
 
-//   handleLogOutButton = event => {
-//     localStorage.clear();
-//     localStorage.removeItem("state");
-//     this.props.history.push("/login");
-//   };
+  handleLogOutButton = event => {
+    localStorage.clear();
+    localStorage.removeItem("state");
+    this.props.history.push("/login");
+  };
 
   render() {
     return (
       <Container>
-        <Menu>
+        <Menu fixed="top" >
           <Menu.Item>
-            <Flag name="us" />
+            <Icon name="food" size="large" />
           </Menu.Item>
           <Menu.Item>
             <Link to="/">
-              <Button color="orange">Home</Button>
+              <Button color="blue">Home</Button>
             </Link>
           </Menu.Item>
           <Menu.Item>
             <Link to="./checkout">
-              <Button animated="vertical" position="right" color="orange">
+              <Button 
+              animated="vertical" 
+              position="right" 
+              color="blue">
                 <Button.Content visible>
                   My Cart 
                 </Button.Content>
@@ -39,8 +42,40 @@ class Navigation extends Component {
               </Button>
             </Link>
           </Menu.Item>
-
-         }
+          <Menu.Item>
+            <Link to="./orders">
+              <Button color="blue">My Orders</Button>
+            </Link>
+          </Menu.Item>  
+          {localStorage.getItem("jwt") ? (
+            <Menu.Item position="right">
+              <Button
+                animated="vertical"
+                position="right"
+                color="blue"
+                onClick={this.handleLogOutButton}
+              >
+                <Button.Content visible>Log out</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="log out" />
+                </Button.Content>
+              </Button>
+            </Menu.Item>
+          ) : (
+            <Menu.Item position="right">
+              <Button
+                animated="vertical"
+                position="right"
+                color="orange"
+                onClick={this.handleLogInButton}
+              >
+                <Button.Content visible>Log in</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="shop" />
+                </Button.Content>
+              </Button>
+            </Menu.Item>
+          )}
         </Menu>
       </Container>
     );

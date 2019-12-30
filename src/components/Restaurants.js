@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import * as actions from '../Store/actions/index'
 import SeeOrders from './SeeOrders'
 
+const uuidv4 = require('uuid/v4');
+
+
 class showRestaurants extends Component {
     state = { 
-        modalOpen: false
+        modalOpen: false,
     }
 
     handleOpen = (id) => {
@@ -15,9 +18,17 @@ class showRestaurants extends Component {
 
     handleClose = () => this.setState({ modalOpen: false })
 
-    handleAddClick = (price, item, restaurantName) => {
-        this.props.addMenuItem(price, item, restaurantName)
+    handleAddClick = (price, item, restaurantName, id) => {
+        this.props.addMenuItem(price, item, restaurantName, id)
+        this.props.addItemPrice(price)
     }
+
+    handleRemove = (itemId) => {
+        console.log('itemId', itemId)
+        this.props.removeFromCart(itemId)
+    }
+
+    
 
     displayMenus = (menus, restaurantName) => {
         return (menus.map(menuHeader => {
@@ -25,13 +36,16 @@ class showRestaurants extends Component {
                 <h3> {menuHeader.section_name}</h3>
                 <ul>
                     {menuHeader.menu_items.map(item => (
-                        <li >{item.name} {item.price} 
-                        <Button onClick={() => this.handleAddClick(item.price, item.name, restaurantName)}>add</Button> <Button>remove</Button></li>
+                       <li >{item.name} {item.price} {item.description}
+                        <Button animated="vertical" position="right" color="blue" onClick={() => this.handleAddClick(item.price, item.name, restaurantName, uuidv4())}><Button.Content visible >add</Button.Content><Button.Content hidden>added</Button.Content></Button>  </li>
                     ))}
                 </ul>
             </div>
         }))
     }
+
+  
+
 
 
     render() {
@@ -43,7 +57,7 @@ class showRestaurants extends Component {
                             <Card key={r.restaurant_id}>
                                 <Card.Content>
                                     <Card.Header>{r.restaurant_name}</Card.Header>
-                                    <Card.Meta>Hours of operation: {r.hours}</Card.Meta>
+                                    <Card.Meta>Hours of operation: {r.hours ? r.hours : "N/A"}</Card.Meta>
                                     <Card.Description>
                                         {r.restaurant_phone}
                                     </Card.Description>
@@ -52,15 +66,14 @@ class showRestaurants extends Component {
                                     </Card.Description>
                                 </Card.Content>
                                 <Card.Content extra>
-                                    <Modal
-                                        trigger={<Button onClick={()=>this.handleOpen(r.restaurant_id)}>Show Modal</Button>}
+                                <Modal
+                                        trigger={<Button onClick={()=>this.handleOpen(r.restaurant_id)}>See Menu</Button>}
                                         open={this.state.modalOpen === r.restaurant_id}
                                         onClose={this.handleClose}
-                                        basic
-                                        size='small'
+                                        basic size='small'
                                     >
-                                        <Header icon='food' content="Menu Items" />
-                                        <Modal.Content >
+                                        <Header icon="shop" content={this.props.itemCount.length} />
+                                        <Modal.Content>
                                             <div>
                                             {this.displayMenus(r.menus[0].menu_sections, r.restaurant_name)}
                                             </div>
@@ -71,14 +84,6 @@ class showRestaurants extends Component {
                                              </Button>
                                         </Modal.Actions>
                                     </Modal>
-                                    {/* <div className='ui two buttons'>
-                  <Button basic color='green'>
-                    Approve
-                  </Button>
-                  <Button basic color='red'>
-                    Decline
-                  </Button>
-                </div> */}
                                 </Card.Content>
                             </Card>))
                             }
@@ -93,12 +98,14 @@ class showRestaurants extends Component {
 const mapStateToProps = state => {
     return {
         rs: state.restaurantState.results,
+        itemCount: state.menu.item
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addMenuItem: (itemPrice, itemName, restaurantName) => dispatch(actions.addMenuItem(itemPrice, itemName, restaurantName))
+        addMenuItem: (itemPrice, itemName, restaurantName, id) => dispatch(actions.addMenuItem(itemPrice, itemName, restaurantName, id)),
+        addItemPrice: (itemPrice) => dispatch(actions.addItemPrice(itemPrice))
     }
 }
 
