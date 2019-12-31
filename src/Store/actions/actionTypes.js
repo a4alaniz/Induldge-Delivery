@@ -7,3 +7,5 @@ export const REMOVE_ITEM = 'REMOVE_ITEM'
 
 export const ADD_ITEM_PRICE = 'ADD_ITEM_PRICE'
 export const SUBTRACT_ITEM_PRICE = 'SUBTRACT_ITEM_PRICE'
+
+export const ADD_ITEM = 'ADD_ITEM'

@@ -19,7 +19,6 @@ export const holdAddress = (address) => {
 
 
 export const initRestaurantData = (lat, long, distance, cuisine) => dispatch => {
-    console.log(lat, long)
         axios.get(`https://us-restaurant-menus.p.rapidapi.com/restaurants/search/?lat=${lat}&lon=${long}&distance=${distance}&q=cuisines:${cuisine}&page=2&fullmenu`, {
             "method": "GET",
             "headers": {
@@ -31,7 +30,6 @@ export const initRestaurantData = (lat, long, distance, cuisine) => dispatch => 
             dispatch(setRestaurantData(response.data.result.data.map(restaurant => (
                restaurant 
             ))));
-            console.log(response.data.result.data)
         })
         .catch(err => {
             console.log(err);
