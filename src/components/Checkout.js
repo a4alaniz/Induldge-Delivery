@@ -1,37 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Button, Modal, Container, Form, Input, TextArea } from 'semantic-ui-react'
+import { Button, Modal, Container, Form, Input, TextArea, Header } from 'semantic-ui-react'
 import * as actions from '../Store/actions/index'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 class Checkout extends Component {
 
     state = {
-        order_total: ''
-        // address: '',
-        // city: '',
-        // state: '',
-        // zipcode: '',
-        // notes: ''
+        street: '',
+        city: '',
+        zipcode: '',
+        state: ''
     }
 
-    // handleChange = event => {
-    //     event.persist();
-    //     this.setState({
-    //       [event.target.name]: event.target.value
-    //     });
-    //   };
-
-
-     componentDidMount = () => {
-       let sum = this.props.menuItems.reduce((a, {itemPrice}) => a + itemPrice, 0);
-       this.setState({order_total: sum})
-     }
+    handleChange = event => {
+        event.persist();
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+      };
 
 firstMap = () => {
     console.log(this.props.menuItems)
     return  (this.props.menuItems.map(cart => {
-     return  <ListGroup.Item>{cart.restaurantName} {cart.itemName} {cart.itemPrice} <Button onClick={() => this.handleRemove(cart.itemId, cart.itemPrice)}>Remove</Button></ListGroup.Item>
+     return  <ListGroup.Item><Header color='blue' as='h1'>{cart.restaurantName}</Header> <Header color='blue' as='h2'>{cart.itemName}</Header> <Header color='blue' as='h3'>{cart.itemPrice}</Header> <Button onClick={() => this.handleRemove(cart.itemId, cart.itemPrice)}>Remove</Button></ListGroup.Item>
     }))
 }
 
@@ -40,29 +32,26 @@ handleRemove = (itemId, price) => {
     this.props.subtractItemPrice(price)
 }
 
-// handleSubmit = (event) => {
-//     const user = JSON.parse(localStorage.getItem("user"))
-//     const { address, city, state, zipcode, notes, order_total } = this.state
-//     event.preventDefault()
-//     this.setState({
-//         [event.target.name]: event.target.value 
-//     })
-//     let order = {
-//         address,
-//         city,
-//         state,
-//         zipcode,
-//         notes,
-//         order_total,
-//         user_id: user.id,
-//         order_items: this.props.menuItems(item => ({
-//             itemName: item.itemName,
-//             itemPrice: item.itemPrice,
-//             restaurant: item.restaurantName
-//         }))
-//     }
-    // this.props.onSubmitOrder(order)
-// }
+handleSubmit = (event) => {
+    const user = JSON.parse(localStorage.getItem("user"))
+    const { street, city, zipcode, state } = this.state
+    event.preventDefault()
+    this.setState({
+        [event.target.name]: event.target.value 
+    })
+    let order = {
+        user_id: user.id,
+        street,
+        city,
+        zipcode,
+        state,
+        order_total: this.props.order_total,
+        order_items: this.props.menuItems.map(item => ({
+            item_id: item.itemId
+        }))
+    }
+    this.props.onSubmitOrder(order)
+}
 
     render() {
         return (
@@ -82,9 +71,9 @@ handleRemove = (itemId, price) => {
                          <Form.Field
                             id='form-input-control-address'
                             control={Input}
-                            label='Address'
-                            placeholder='Address'
-                            name='address'
+                            label='Street'
+                            placeholder='Street'
+                            name='street'
                             onChange={this.handleChange}
                         />
                          <Form.Field
@@ -97,6 +86,14 @@ handleRemove = (itemId, price) => {
                         />
                         </Form.Group>
                     <Form.Group widths='equal'>
+                        <Form.Field
+                           id='form-input-control-zipcode'
+                           control={Input}
+                           label='Zipcode'
+                           placeholder='Zipcode'
+                           name='zipcode'
+                           onChange={this.handleChange}
+                       />
                          <Form.Field
                             id='form-input-control-state'
                             control={Input}
@@ -105,21 +102,12 @@ handleRemove = (itemId, price) => {
                             name='state'
                             onChange={this.handleChange}
                         />
-                         <Form.Field
-                            id='form-input-control-zipcode'
-                            control={Input}
-                            label='Zipcode'
-                            placeholder='Zipcode'
-                            name='zipcode'
-                            onChange={this.handleChange}
-                        />
                         </Form.Group>
                         <Form.Field
                         id='form-textarea-control-notes'
                         control={TextArea}
                         label='Notes'
                         placeholder='Notes, Special Requests'
-                        onChange={this.handleChange}
                         />
                         <Form.Field
                         id='form-button-control-public'
@@ -145,8 +133,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
     removeFromCarts: (itemId) => dispatch(actions.removeFromCarts(itemId)),
-    subtractItemPrice: (price) => dispatch(actions.subtractItemPrice(price))
-    // onSubmitOrder: (order) => dispatch(actions.submitOrder(order))
+    subtractItemPrice: (price) => dispatch(actions.subtractItemPrice(price)),
+    onSubmitOrder: (order) => dispatch(actions.submitOrder(order))
 }
 }
 

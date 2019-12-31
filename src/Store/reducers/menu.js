@@ -6,10 +6,6 @@ const initialState = {
     order_total: 0
 }
 
-
-
-
-
 const addMenuItem = (state, action) => {
     let updatedMenu = {
         itemPrice: action.itemPrice,

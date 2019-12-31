@@ -60,6 +60,8 @@ class home extends Component {
                 <br></br>
                 <br></br>
                 <br></br>
+                <h1>Search Restaurants</h1>
+                <br></br>
                 <Form><Form.Field><PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}

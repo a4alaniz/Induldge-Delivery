@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Menu, Button, Icon } from "semantic-ui-react";
 // import { connect } from "react-redux";
-
+import Nav from 'react-bootstrap/Nav'
 import { Link, withRouter } from "react-router-dom";
 
 class Navigation extends Component {
