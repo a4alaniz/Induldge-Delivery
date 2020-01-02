@@ -50,11 +50,12 @@ class showRestaurants extends Component {
 
     render() {
         return (
-            <div>
+            // <Container>
                 <Container textAlign="center">
                     <Card.Group itemsPerRow={2}>
                         {this.props.rs.map(r => (
-                            <Card key={r.restaurant_id}>
+                            // <Card key={r.restaurant_id}>
+                                <Card >
                                 <Card.Content>
                                     <Card.Header><Header as='h3'>{r.restaurant_name}</Header></Card.Header>
                                     <Card.Meta><Header as='h4'>Hours of operation: {r.hours ? r.hours : "N/A"}</Header></Card.Meta>
@@ -91,7 +92,7 @@ class showRestaurants extends Component {
                             }
                     </Card.Group>
                 </Container>
-            </div>
+            // </Container>
         )
     }
 }

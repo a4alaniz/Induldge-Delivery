@@ -40,12 +40,22 @@ const subtractItemPrice = (state, action) => {
     return updateObject(state, updatedState)
 }
 
+const removeOrder = (state, action) => {
+    let emptyArray = []
+    const updatedState = {
+        item: emptyArray, 
+        order_total: 0
+    }
+    return updateObject(state, updatedState)
+}
+
 const reducer = ( state = initialState, action) => {
     switch ( action.type ) {
         case actionTypes.ADD_MENU_ITEM: return addMenuItem(state, action)
         case actionTypes.REMOVE_ITEM: return removeFromCarts(state, action)
         case actionTypes.ADD_ITEM_PRICE: return addItemPrice(state, action)
         case actionTypes.SUBTRACT_ITEM_PRICE: return subtractItemPrice(state, action)
+        case actionTypes.REMOVE_ORDER: return removeOrder(state, action)
         default: return state
     }
 } 

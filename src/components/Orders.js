@@ -1,24 +1,27 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import ListGroup from 'react-bootstrap/ListGroup'
+import {Header } from 'semantic-ui-react'
 
 class Orders extends Component {
 
-    orderTotal = () => {
-        this.props.cartItems.map(item => {
-            console.log(item.itemPrice)
-            return item.itemPrice
-        })
-    }
-    
-    render() {
-        let arr = []
-        console.log(this.props.cartItems.map(item => {
-            console.log(arr.concat(item.itemPrice))
-            return item
+    firstMap = () => {
+        return  (this.props.orderItems.map(cart => {
+         return  <ListGroup.Item><Header color='blue' as='h1'>{cart.restaurantName}</Header> <Header color='blue' as='h2'>{cart.itemName}</Header> <Header color='blue' as='h3'>{cart.itemPrice}</Header> </ListGroup.Item>
         }))
+    }
+
+    render() {
+        console.log(this.props.orderItems)
         return (
             <div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <h1>Order History</h1>
+                <h2>Your Order Items: <ListGroup>{this.firstMap()}</ListGroup></h2>
             </div>
         )
     }
@@ -26,8 +29,8 @@ class Orders extends Component {
 
 const mapStateToProps = state => {
     return {
-        cartItems: state.menu.item
+       orderItems: state.order.orderItems
     }
 }
 
-export default connect(mapStateToProps)(Orders)
+export default connect(mapStateToProps, null)(Orders)

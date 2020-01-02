@@ -3,15 +3,19 @@ import { connect } from 'react-redux';
 import { Button, Modal, Container, Form, Input, TextArea, Header } from 'semantic-ui-react'
 import * as actions from '../Store/actions/index'
 import ListGroup from 'react-bootstrap/ListGroup'
+import { withRouter } from "react-router-dom";
 
 class Checkout extends Component {
+    constructor() {
+        super();
 
-    state = {
+    this.state = {
         street: '',
         city: '',
         zipcode: '',
         state: ''
     }
+}
 
     handleChange = event => {
         event.persist();
@@ -50,8 +54,24 @@ handleSubmit = (event) => {
             item_id: item.itemId
         }))
     }
-    this.props.onSubmitOrder(order)
-}
+     fetch("http://localhost:3001/api/v1/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+                order
+            })
+        })
+        .then(response => response.json())
+        .then(resopnse => {
+            this.props.history.push("/")
+            this.props.seeOrderHistory(this.props.menuItems)
+            this.props.removeOrder()
+        })
+     }
+
 
     render() {
         return (
@@ -123,6 +143,7 @@ handleSubmit = (event) => {
     }
 }
 
+
 const mapStateToProps = state => {
     return {
        menuItems: state.menu.item,
@@ -134,8 +155,9 @@ const mapDispatchToProps = dispatch => {
     return {
     removeFromCarts: (itemId) => dispatch(actions.removeFromCarts(itemId)),
     subtractItemPrice: (price) => dispatch(actions.subtractItemPrice(price)),
-    onSubmitOrder: (order) => dispatch(actions.submitOrder(order))
-}
+    removeOrder: () => dispatch(actions.removeOrder()),
+    seeOrderHistory: (orderItems) => dispatch(actions.seeOrderHistory(orderItems))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps )(Checkout)            

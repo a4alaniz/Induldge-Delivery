@@ -9,3 +9,7 @@ export const ADD_ITEM_PRICE = 'ADD_ITEM_PRICE'
 export const SUBTRACT_ITEM_PRICE = 'SUBTRACT_ITEM_PRICE'
 
 export const ADD_ITEM = 'ADD_ITEM'
+
+export const REMOVE_ORDER = 'REMOVE_ORDER'
+export const SEE_ORDER_HISTORY = 'SEE_ORDER_HISTORY'
+ 
