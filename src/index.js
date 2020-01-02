@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import restaurantReducer from './Store/reducers/restaurant'
 import menuReducer from './Store/reducers/menu'
 import userReducer from './Store/reducers/User'
+import orderReducer from './Store/reducers/order'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { reducer as formReducer } from 'redux-form'
 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     restaurantState: restaurantReducer,
     menu: menuReducer,
     user: userReducer,
-    form: formReducer
+    form: formReducer,
+    order: orderReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(
