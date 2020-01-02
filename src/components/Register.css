@@ -1,0 +1,10 @@
+.bgRegister {
+    background-image: url("https://dmn-dallas-news-prod.cdn.arcpublishing.com/resizer//2jM9ez8T60WLihmld0kvn6xFqBE=/1660x934/smart/filters:no_upscale()/arc-anglerfish-arc2-prod-dmn.s3.amazonaws.com/public/EWSIW5FWDRBBRCRRODIHUXS54U.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+  }

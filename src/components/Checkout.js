@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Button, Modal, Container, Form, Input, TextArea, Header } from 'semantic-ui-react'
+import { Button, Modal, Container, Form, Input, TextArea, Header, Image } from 'semantic-ui-react'
 import * as actions from '../Store/actions/index'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { withRouter } from "react-router-dom";
+import './checkout.css'
 
 class Checkout extends Component {
     constructor() {
@@ -27,7 +28,7 @@ class Checkout extends Component {
 firstMap = () => {
     console.log(this.props.menuItems)
     return  (this.props.menuItems.map(cart => {
-     return  <ListGroup.Item><Header color='blue' as='h1'>{cart.restaurantName}</Header> <Header color='blue' as='h2'>{cart.itemName}</Header> <Header color='blue' as='h3'>{cart.itemPrice}</Header> <Button onClick={() => this.handleRemove(cart.itemId, cart.itemPrice)}>Remove</Button></ListGroup.Item>
+     return  <ListGroup.Item><Header color='blue' as='h1'>{cart.restaurantName}</Header> <Header  as='h2'>{cart.itemName}</Header> <Header  as='h3'>{cart.itemPrice}</Header> <Button onClick={() => this.handleRemove(cart.itemId, cart.itemPrice)}>Remove</Button></ListGroup.Item>
     }))
 }
 
@@ -75,13 +76,25 @@ handleSubmit = (event) => {
 
     render() {
         return (
-            <div>
+            <div className='bg'>
+                 <div style={{maxWidth: '800px', margin: '0 auto', backgroundColor: '#ffffffaf', padding: '40px', borderRadius: '6px'}}>
+                {this.props.menuItems.length < 1 ? (
+                    <Container>
+                         <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                        <Header>0 Items in Cart</Header>
+                        <Image src='https://www.seekpng.com/png/detail/117-1170538_404-your-cart-is-empty.png' />
+                    </Container>
+                ) : (
+                    <div>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
                 <h1>Order: <ListGroup>{this.firstMap()}</ListGroup></h1>
-                <h1>Order Total: {this.props.order_total} </h1>
+                <h1>Order Total: {this.props.order_total.toFixed(2)} </h1>
                 <Container>
                 <Modal trigger={<Button>Place Order</Button>}>
                   <Modal.Header>Delivery Address</Modal.Header>
@@ -137,7 +150,8 @@ handleSubmit = (event) => {
                     </Form>
                  </Modal.Content>
                 </Modal>
-                </Container>
+                </Container></div>)}
+            </div>
             </div>
         )
     }

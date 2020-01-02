@@ -17,7 +17,7 @@ class Navigation extends Component {
 
   render() {
     return (
-      <Container>
+      <div >
         <Menu fixed="top" >
           <Menu.Item>
             <Icon name="food" size="large" />
@@ -77,7 +77,7 @@ class Navigation extends Component {
             </Menu.Item>
           )}
         </Menu>
-      </Container>
+      </div>
     );
   }
 }
