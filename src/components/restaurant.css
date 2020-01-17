@@ -1,0 +1,7 @@
+.ui.scrolling.modal {
+    overflow: scroll;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    transform: translate(-50%, -50%)''
+}

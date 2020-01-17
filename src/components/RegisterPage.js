@@ -7,7 +7,7 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-
+import './Register.css'
 class Register extends Component {
   constructor() {
     super();
@@ -65,6 +65,8 @@ class Register extends Component {
     console.log("Current SignUp State: ", this.state);
 
     return (
+      <div className='bgRegister'>
+          <div style={{maxWidth: '800px', margin: '0 auto', backgroundColor: '#ffffffaf', padding: '40px', borderRadius: '6px'}}>
       <Grid verticalAlign="middle" centered columns={2}>
         <Grid.Column>
           <br></br>
@@ -117,6 +119,8 @@ class Register extends Component {
           </Message>
         </Grid.Column>
       </Grid>
+      </div>
+      </div>
     );
   }
 }

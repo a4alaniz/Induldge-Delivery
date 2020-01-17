@@ -1,0 +1,10 @@
+.bg2 {
+    background-image: url("https://theknow.denverpost.com/wp-content/uploads/2019/05/TDP-L-GINGER-PIG-FOOD-TRUCK_JAC6847x-0309.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+  }

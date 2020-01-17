@@ -25,6 +25,32 @@ export const subtractItemPrice = (itemPrice) => {
     }
 }
 
+export const removeOrder = () => {
+    return {
+        type: actionTypes.REMOVE_ORDER
+    }
+}
+
+export const addItem = (itemPrice, itemName, restaurantName, id) => dispatch => {
+   fetch("http://localhost:3001/api/v1/items", {
+       method: "POST",
+       headers: {
+           "Content-Type": "application/json",
+           Accept: "application/json"
+       },
+       body: JSON.stringify({
+           item: {
+               price: itemPrice,
+               name: itemName,
+               restaurant: restaurantName,
+               uid: id
+           } 
+       })
+   })
+   .then(response => response.json())
+}
+
+
 export const removeFromCarts = (id) => {
     return {
         type: actionTypes.REMOVE_ITEM,

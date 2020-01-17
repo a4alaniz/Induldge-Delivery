@@ -1,0 +1,10 @@
+.bgLogin {
+    background-image: url("https://images.surfacemag.com/app/uploads/2018/03/15122006/EmpireDiner_010TJ-SELECTS1.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+  }

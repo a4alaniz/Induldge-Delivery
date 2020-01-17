@@ -1,0 +1,10 @@
+.bg {
+    background-image: url("https://cdn.vox-cdn.com/thumbor/PMsdRpOUmswh-Fz3mEV0_JulmaQ=/0x0:4000x2667/1200x800/filters:focal(1680x1014:2320x1654)/cdn.vox-cdn.com/uploads/chorus_image/image/65902559/GALDOPHOTO_11November2019_Chefs_Special_HG4A0325.0.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+  }

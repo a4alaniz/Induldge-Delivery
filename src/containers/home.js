@@ -4,9 +4,11 @@ import Restaurants from '../components/Restaurants'
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { Container } from "semantic-ui-react";
-import { Form, Button} from 'semantic-ui-react'
-
+import { Form, Button } from 'semantic-ui-react'
+import './css.css'
 import * as actions from '../Store/actions/index'
+
+
 
 class home extends Component {
 
@@ -18,9 +20,6 @@ class home extends Component {
         cuisine: ''
     }
 
-    // componentDidMount () {
-    //     console.log(actions)
-    // }
 
     handleDistanceChange = (event) => {
         event.persist();
@@ -55,10 +54,13 @@ class home extends Component {
 
     render() {
         return (
-            <Container>
+          <div className='bg1'>
+            <div style={{maxWidth: '800px', margin: '0 auto', backgroundColor: '#ffffffaf', padding: '40px', borderRadius: '6px'}}>
                 <br></br>
                 <br></br>
                 <br></br>
+                <br></br>
+                <h1>Hungry? Order Now!</h1>
                 <br></br>
                 <Form><Form.Field><PlacesAutocomplete
         value={this.state.address}
@@ -70,7 +72,7 @@ class home extends Component {
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',
-                className: 'location-search-input',
+                className: 'location-search-input'
               })}
             />
             <div className="autocomplete-dropdown-container">
@@ -100,8 +102,8 @@ class home extends Component {
       </PlacesAutocomplete></Form.Field></Form>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group widths='equal'>
-                    <Form.Field><label>Distance <input type="text" value={this.state.distance} onChange={this.handleDistanceChange}/> </label></Form.Field>
-                    <Form.Field><label>Type of Cuisine <input type="text" value={this.state.cuisine} onChange={this.handleCuisineChange}/> </label></Form.Field>
+                    <Form.Field><label>Distance <input type="text" value={this.state.distance} onChange={this.handleDistanceChange} placeholder='Distance in miles away from location'/> </label></Form.Field>
+                    <Form.Field><label>Type of Cuisine <input type="text" value={this.state.cuisine} onChange={this.handleCuisineChange} placeholder='What are you in the mood for?'/> </label></Form.Field>
                       </Form.Group>
                     <Form.Group>
                     <Form.Field
@@ -111,7 +113,8 @@ class home extends Component {
     /></Form.Group>
                 </Form>
                 <Restaurants/>
-            </Container>
+            </div>
+            </div>
         )
     }
 }

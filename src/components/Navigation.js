@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Menu, Button, Icon } from "semantic-ui-react";
 // import { connect } from "react-redux";
-
+import Nav from 'react-bootstrap/Nav'
 import { Link, withRouter } from "react-router-dom";
 
 class Navigation extends Component {
@@ -17,7 +17,7 @@ class Navigation extends Component {
 
   render() {
     return (
-      <Container>
+      <div >
         <Menu fixed="top" >
           <Menu.Item>
             <Icon name="food" size="large" />
@@ -77,7 +77,7 @@ class Navigation extends Component {
             </Menu.Item>
           )}
         </Menu>
-      </Container>
+      </div>
     );
   }
 }
