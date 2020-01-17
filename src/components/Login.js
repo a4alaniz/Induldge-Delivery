@@ -76,6 +76,7 @@ class Login extends Component {
 
     return !localStorage.getItem("jwt") ? (
       <div className='bgLogin'>
+        <div style={{maxWidth: '1000px', margin: '0 auto', backgroundColor: '#ffffffaf', padding: '40px', borderRadius: '6px'}}>
       <br></br>
       <br></br>
       <br></br>
@@ -133,6 +134,7 @@ class Login extends Component {
           </Message> */}
         </Grid.Column>
       </Grid>
+      </div>
       </div>
     ) : (
       <Redirect to="/" />
