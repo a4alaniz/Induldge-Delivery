@@ -1,0 +1,10 @@
+.bg1 {
+    background-image: url("https://cdn-image.foodandwine.com/sites/default/files/1570717105/health-tribes-just-salad-grubhub-FT-BLOG1019-2.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+  }

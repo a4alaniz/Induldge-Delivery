@@ -8,6 +8,7 @@ import {
   Divider
 } from "semantic-ui-react";
 import { withRouter, Redirect } from "react-router-dom";
+import './Login.css'
 
 class Login extends Component {
   constructor() {
@@ -74,6 +75,12 @@ class Login extends Component {
     // console.log("Current Login State = ", this.state);
 
     return !localStorage.getItem("jwt") ? (
+      <div className='bgLogin'>
+        <div style={{maxWidth: '1000px', margin: '0 auto', backgroundColor: '#ffffffaf', padding: '40px', borderRadius: '6px'}}>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Grid verticalAlign="middle" columns={2} color="grey" centered>
         <Grid.Column>
           <br></br>
@@ -127,6 +134,8 @@ class Login extends Component {
           </Message> */}
         </Grid.Column>
       </Grid>
+      </div>
+      </div>
     ) : (
       <Redirect to="/" />
     );

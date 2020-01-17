@@ -4,6 +4,7 @@ import { Card, Button, Container, Header, Icon, Modal } from "semantic-ui-react"
 import { connect } from 'react-redux';
 import * as actions from '../Store/actions/index'
 import ListGroup from 'react-bootstrap/ListGroup'
+import restaurant from './restaurant.css'
 const uuidv4 = require('uuid/v4');
 
 class showRestaurants extends Component {
@@ -36,8 +37,8 @@ class showRestaurants extends Component {
                 <Header> {menuHeader.section_name}</Header>
                 {/* <> */}
                     {menuHeader.menu_items.map(item => (
-                       <ListGroup.Item ><Header color="blue" as='h2'>{item.name}</Header>{item.price} {item.description}
-                          <Button animated="vertical" position="right" color="blue" onClick={() => this.handleAddClick(item.price, item.name, restaurantName, uuidv4())}><Button.Content visible >add</Button.Content><Button.Content hidden>1</Button.Content></Button>  </ListGroup.Item>
+                       <ListGroup.Item ><Header color="blue" as='h2'>{item.name} {item.price}</Header> {item.description}
+                         <br></br><br></br> <Button animated="vertical" position="right" color="blue" onClick={() => this.handleAddClick(item.price, item.name, restaurantName, uuidv4())}><Button.Content visible >add</Button.Content><Button.Content hidden>1</Button.Content></Button>  </ListGroup.Item>
                     ))}
                 {/* </> */}
             </div>
